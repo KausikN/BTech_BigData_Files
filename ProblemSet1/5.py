@@ -31,4 +31,3 @@ labels = ['S', 'A', 'B', 'C', 'D']
 
 GenerateBarGraph(data, labels)
 GeneratePieChart(data, labels)
-

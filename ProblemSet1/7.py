@@ -91,4 +91,3 @@ print("Freq Dist of Grades: ")
 freq = FreqDist(Grades, PossibleGrades)
 for key in PossibleGrades:
     print(key + ":", freq[key])
-
