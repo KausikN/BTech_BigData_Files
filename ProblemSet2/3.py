@@ -7,6 +7,7 @@ BEVERAGES   2.2, 2.5, 2.6, 1.5, 3.8, 1.9, 0.9, 3.9, 4.9, 6.9, 0.1, 8.0, 0.3, 2.6
 '''
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
 
 def Sum(X):
     return np.sum(np.array(X))
@@ -47,6 +48,27 @@ def StandardDeviation(X):
 def Skewness(X):
     return (Mean(X) - Mode(X)) / StandardDeviation(X)
 
+def DensityPlot(X, labels):
+    for x, label in zip(X, labels):
+        sns.distplot(x, hist = False, kde = True,
+                    kde_kws = {'linewidth': 3},
+                    label = label)
+    
+    # Plot formatting
+    plt.legend(prop={'size': 16}, title = 'Water vs Beverage')
+    plt.title('Density Plot')
+    plt.xlabel('Days')
+    plt.ylabel('Consumption')
+    plt.show()
+
+def RugPlot(X, labels):
+    for x, label in zip(X, labels):
+        sns.rugplot(x, label=label)
+    plt.title('Rug Plot')
+    plt.xlabel('Days')
+    plt.ylabel('Consumption')
+    plt.show()
+
 # Driver Code
 WATER = [3.2, 3.5, 3.6, 2.5, 2.8, 5.9, 2.9, 3.9, 4.9, 6.9, 7.9, 8.0, 3.3, 6.6, 4.4]
 BEVERAGES = [2.2, 2.5, 2.6, 1.5, 3.8, 1.9, 0.9, 3.9, 4.9, 6.9, 0.1, 8.0, 0.3, 2.6, 1.4]
@@ -62,5 +84,7 @@ print("Mean:", Mean(BEVERAGES))
 print("Median:", Median(BEVERAGES))
 print("Mode:", Mode(BEVERAGES))
 print("Skewness:", Skewness(BEVERAGES))
+
+RugPlot([WATER, BEVERAGES], ['Water', 'Beverages'])
 
 # RUG PLOT AND DENSITY PLOT LEFT
