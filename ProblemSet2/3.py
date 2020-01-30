@@ -85,6 +85,8 @@ print("Median:", Median(BEVERAGES))
 print("Mode:", Mode(BEVERAGES))
 print("Skewness:", Skewness(BEVERAGES))
 
+DensityPlot([WATER, BEVERAGES], ['Water', 'Beverages'])
+
 RugPlot([WATER, BEVERAGES], ['Water', 'Beverages'])
 
 # RUG PLOT AND DENSITY PLOT LEFT

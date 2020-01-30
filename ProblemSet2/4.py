@@ -8,3 +8,38 @@ Fuel used
 (L)                     3.6 6.7 9.8 11.2 14.7 
 Mass (metric tons)      0.45 0.91 1.36 1.81 2.27 
 '''
+import matplotlib.pyplot as plt
+
+def Correlation(X, Y):
+    n = len(X)
+    sig_xy = 0
+    sig_x = 0
+    sig_y = 0
+    sig_x2 = 0
+    sig_y2 = 0
+    for x, y in zip(X, Y):
+        sig_xy += x*y
+        sig_x += x
+        sig_y += y
+        sig_x2 += x**2
+        sig_y2 += y**2
+
+    corr = ((n*sig_xy) - (sig_x*sig_y)) / (((n*sig_x2 - (sig_x**2)) * (n*sig_y2 - (sig_y**2)))**(1/2))
+    return corr
+
+def Scatterplot(X, Y):
+    plt.scatter(X, Y)
+    plt.title('Scatter Plot')
+    plt.xlabel('Mass')
+    plt.ylabel('Litres')
+    plt.show()
+
+# Driver Code
+Mass = [0.45, 0.91, 1.36, 1.81, 2.27]
+L = [3.6, 6.7, 9.8, 11.2, 14.7]
+
+print(Correlation(Mass, L))
+
+Scatterplot(Mass, L)
+
+# Positive Correlation
