@@ -61,7 +61,7 @@ def FreqDist(X, binsize):
     return Freq
 
 def PrintNonZeroFreq(FreqDist, binsize):
-    print("Freq Dist " + binsize + " Non Zero Values: ")
+    print("Freq Dist " + str(binsize) + " Non Zero Values: ")
     nbins = 0
     for k in FreqDist.keys():
         if FreqDist[k] > 0:
