@@ -81,7 +81,7 @@ def MissingCount(Data, label):
     return missing, indices
 
 # Driver Code
-filepath = 'ProblemSet3/avocado_csv.csv'
+filepath = 'ProblemSet3/Subset 1/avocado_csv.csv'
 labels = ['Unnamed: 0', 'Date', 'AveragePrice', 'Total Volume', '4046', '4225',
             '4770', 'Total Bags', 'Small Bags', 'Large Bags', 'XLarge Bags', 'type',
             'year', 'region']
