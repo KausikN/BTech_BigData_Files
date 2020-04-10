@@ -111,7 +111,7 @@ def RuleMining(FrequentItems, min_threshold=1):
 
 # CFI
 # Charm
-def Charm(Dataset_Encoded, min_support=0.05):
+def Charm(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
     CFI = []
 
     min_support = min_support * len(Dataset_Encoded.index)
@@ -179,23 +179,35 @@ def Charm(Dataset_Encoded, min_support=0.05):
             if CommonCount >= min_support:
                 cfi_item = [Items_Sorted[i], Items_Sorted[j]]
                 # Not Sure if needed Subset or Common Elements
+
+                # Common Elements
+                # for k in range(j+1, len(Items_Sorted)):
+                #     CommonElements_temp = [value for value in CommonElements if value in AppearanceDict[Items_Sorted[k]]]
+                #     CommonCount_temp = len(CommonElements_temp)
+                #     if CommonCount_temp >= min_support:
+                #         CommonElements = CommonElements_temp
+                #         CommonCount = CommonCount_temp
+                #         cfi_item.append(Items_Sorted[k])
+
+                # Subset
                 for k in range(j+1, len(Items_Sorted)):
-                    CommonElements_temp = [value for value in CommonElements if value in AppearanceDict[Items_Sorted[k]]]
-                    CommonCount_temp = len(CommonElements_temp)
-                    if CommonCount_temp >= min_support:
-                        CommonElements = CommonElements_temp
-                        CommonCount = CommonCount_temp
+                    if set(CommonElements).issubset(set(AppearanceDict[Items_Sorted[k]])):
+                        CommonElements = AppearanceDict[Items_Sorted[k]]
+                        CommonCount = len(AppearanceDict[Items_Sorted[k]])
                         cfi_item.append(Items_Sorted[k])
-                CFI.append(cfi_item)
+                
+                if min_itemset_length <= len(cfi_item):
+                    CFI.append(cfi_item)
                 cfi_available = True
-        if not cfi_available:
-            cfi_item = [Items_Sorted[i]]
-            CFI.append(cfi_item)
+        if not cfi_available and min_itemset_length <= 1:
+            if len(AppearanceDict[Items_Sorted[i]]) >= min_support:
+                cfi_item = [Items_Sorted[i]]
+                CFI.append(cfi_item)
 
     return CFI
 
 # AprioriClose - AClose
-def AClose(Dataset_Encoded, min_support=0.05):
+def AClose(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
     CFI = []
 
     min_support = min_support * len(Dataset_Encoded.index)
@@ -220,7 +232,6 @@ def AClose(Dataset_Encoded, min_support=0.05):
     # Keep Pruning Till Empty
     Items_Li = Items_L1
     ItemCounts_Li = ItemCounts_L1
-    Items_Li_Backup = []
     i = 1
     while(len(Items_Li) > 0):
         i += 1
@@ -232,9 +243,11 @@ def AClose(Dataset_Encoded, min_support=0.05):
                 if set(cfi).issubset(set(item)): # Check if subset
                     if cfi in newCFI:
                         newCFI.remove(cfi)
-            newCFI.append(item)
+            if min_itemset_length <= len(item):
+                newCFI.append(item)
                     # CFI.remove(cfi)
-            # CFI.append(item)
+            # if min_itemset_length <= len(item):
+                # CFI.append(item)
         CFI = newCFI
 
         # Self-Join
@@ -323,8 +336,9 @@ print("\n\n")
 print("Charm")
 MinimumSupport = 0.1
 MinimumThreshold = 1
+MinimumItemsetLength = 1
 
-CFI = Charm(Dataset_TE, min_support=MinimumSupport)
+CFI = Charm(Dataset_TE, min_support=MinimumSupport, min_itemset_length=MinimumItemsetLength)
 # RuleSet = RuleMining(FrequentItems, min_threshold=MinimumThreshold)
 print("Closed Frequent Itemsets:")
 cfi_index = 1
@@ -332,15 +346,16 @@ for cfi in CFI:
     print(str(cfi_index) + ":", " - ".join(cfi))
     cfi_index += 1
 print("\n\n")
-# print("RuleSet:\n", RuleSet.head)\
+# print("RuleSet:\n", RuleSet.head)
 print("\n\n")
 
 # AClose
 print("AClose")
 MinimumSupport = 0.1
 MinimumThreshold = 1
+MinimumItemsetLength = 1
 
-CFI = AClose(Dataset_TE, min_support=MinimumSupport)
+CFI = AClose(Dataset_TE, min_support=MinimumSupport, min_itemset_length=MinimumItemsetLength)
 # RuleSet = RuleMining(FrequentItems, min_threshold=MinimumThreshold)
 print("Closed Frequent Itemsets:")
 cfi_index = 1
