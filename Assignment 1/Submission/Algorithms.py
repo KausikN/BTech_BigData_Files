@@ -105,24 +105,23 @@ def GenerateMFCS(MFCS, Items_Si):		#For Pincer Search Algorithm
                         MFCS.append(updateMFCS_item)
     return MFCS
 
-@lru_cache(maxsize=32)
+# @lru_cache(maxsize=32)
 def compVertBitmap(itemset, bitMap):
     if len(itemset) == 1:
-        item = itemset[0]
+        item = str(itemset[0])
         return bitMap[item]
 
     else:
-        last_item = itemset[-1]
-        print(itemset[:-1])
-        print(bitMap)
+        last_item = str(itemset[-1])
         return compVertBitmap(itemset[:-1], bitMap) & bitMap[last_item]
 
 def countSupp(itemset, bitMap):
+	
+    # VerticalBitmap(itemset, bitMap)
     itemset_map = compVertBitmap(itemset, bitMap)
     itemset_supp_count = np.count_nonzero(itemset_map)
-
+    # print(itemset_supp_count)
     return itemset_supp_count
-
 
 # Algorithms
 
@@ -395,71 +394,60 @@ def PincerSearch(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
 
 # Mafia
 class MafiaTree:
-    def __init__(self, head, tail):	# supportCount=None
+    def __init__(self, head, tail, supportCount=None):	# supportCount=None
         self.head = head
         self.tail = tail.copy()
-		# self.supportCount = supportCount
+        self.supportCount = supportCount
 
 def MafiaRun(currentMFNode, MFI, bitMap, Items, transCount, min_support):
-    '''
-	#Head Union Tail Pruning (HUT)------>
-	HUT = currentMFNode.head + currentMFNode.tail
+    #Head Union Tail Pruning (HUT)------>
+    HUT = currentMFNode.head + tuple(currentMFNode.tail)
+    # HUT = currentMFNode.head.append(currentMFNode.tail)
 
-	#If HUT is in MFI -> Stop Searching nd return
-	if any(all(item in mfi for item in HUT) for mfi in MFI):
-		return
-	
-	#Count Support of all children
-	print('--------------------------------------',currentMFNode.head)
-	nodeChild_supportCount = [(item, countSupp(currentMFNode.head + (item,), EncodedData) ) for item in currentMFNode.tail]
-	#Extract frequent Children of node and support count
-	nodeFreqChildCount = [(item, support_count) for item, support_count in nodeChild_supportCount if support_count >= min_support]
+    #If HUT is in MFI -> Stop Searching nd return
+    if any(all(item in mfi for item in HUT) for mfi in MFI):
+        return MFI
 
-	node_childEqualParent = []	# items in tail with support count equal to that of parent
-	node_tail_suppCount = []	# items in node tail sorted by Decreasing Support
+    #Count Support of all children
+    # print('--------------------------------------',currentMFNode.head)
+    nodeChild_supportCount = [(item, countSupp(currentMFNode.head + (item,), bitMap) ) for item in currentMFNode.tail]
+    # nodeChild_supportCount = [(item, countSupp(currentMFNode.head.append(item), bitMap) ) for item in currentMFNode.tail]
+    #Extract frequent Children of node and support count
+    nodeFreqChildCount = [(item, support_count) for item, support_count in nodeChild_supportCount if support_count >= min_support]
 
-	for item, support_count in nodeFreqChildCount:
-		if support_count == currentMFNode.supportCount:
-			node_childEqualParent.append(item)
-		else:
-			node_tail_suppCount.append((item, support_count))
+    node_childEqualParent = []	# items in tail with support count equal to that of parent
+    node_tail_suppCount = []	# items in node tail sorted by Decreasing Support
 
-	#Sort items in the trimmed tail by increasing support:
-	node_tail_suppCount.sort(key=lambda x:x[1])
-	node_tail_items = [item for item, support in node_tail_suppCount]
+    for item, support_count in nodeFreqChildCount:
+        if support_count == currentMFNode.supportCount:
+            node_childEqualParent.append(item)
+        else:
+            node_tail_suppCount.append((item, support_count))
 
-	currentMFNode.head += tuple(node_childEqualParent)
-	currentMFNode.tail = node_tail_items
+    #Sort items in the trimmed tail by increasing support:
+    node_tail_suppCount.sort(key=lambda x:x[1])
+    node_tail_items = [item for item, support in node_tail_suppCount]
 
-	is_leaf = not bool(currentMFNode.tail)
+    currentMFNode.head += tuple(node_childEqualParent)
+    # currentMFNode.head.append(node_childEqualParent)
+    currentMFNode.tail = node_tail_items
 
-	for i, item in enumerate(currentMFNode.tail):
-		new_node_head = currentMFNode.head + (item,)
-		new_node_tail = currentMFNode.tail[i+1:]
-		new_node_supportCount = node_tail_suppCount[i][1]
+    is_leaf = not bool(currentMFNode.tail)
 
-		new_node = MafiaTree(new_node_head, new_node_tail, new_node_supportCount)
-
-		MafiaRun(new_node, MFI, EncodedData, Items, transCount, min_support)
-
-	if is_leaf and currentMFNode.head and not any(all(item in mfi for item in currentMFNode.head) for mfi in MFI):
-		MFI.append(set(currentMFNode.head))
-
-	'''
-    is_leaf = True
     for i, item in enumerate(currentMFNode.tail):
-        new_node_head = currentMFNode.head
-        new_node_head.append(item)
-        if countSupp(new_node_head, bitMap) >= min_support:
-            is_leaf = False
-            new_node_tail = currentMFNode.tail[i+1:]
-            new_node = MafiaTree(new_node_head, new_node_tail)
+        new_node_head = currentMFNode.head + (item,)
+        # new_node_head.append(item)
+        new_node_tail = currentMFNode.tail[i+1:]
+        new_node_supportCount = node_tail_suppCount[i][1]
 
-            MafiaRun(new_node, MFI, bitMap, Items, transCount, min_support)
+        new_node = MafiaTree(new_node_head, new_node_tail, new_node_supportCount)
 
-    # if current node is a leaf and no superset of current node head in MFIs
-    if is_leaf and not any(all(item in mfi for item in currentMFNode.head) for mfi in MFI):
-        MFI.append(currentMFNode.head)
+        MFI = MafiaRun(new_node, MFI, bitMap, Items, transCount, min_support)
+
+    if is_leaf and currentMFNode.head and not any(all(item in mfi for item in currentMFNode.head) for mfi in MFI):
+        MFI.append(set(currentMFNode.head))
+
+    return MFI
 
 def Mafia(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
     MFI = []
@@ -472,17 +460,13 @@ def Mafia(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
     for item in Items:
         Itemlist.append(item)
     transCount, itemCount = Dataset_Encoded.shape
-    print(transCount)
+    # print(transCount)
     items_vertical_bitmaps = {item:np.array(Dataset_Encoded[item]) for item in Items}
 
-    # Itemset = ['ACER', 'AMAL', 'AMRE'] 
-
-    # item = Itemset[1]
-    # print(items_vertical_bitmaps[item] & items_vertical_bitmaps[Itemset[0]])
-    root = []
+    root = tuple()
     MFRoot = MafiaTree(root, Itemlist)	#Creates a root Node 
 
-    MafiaRun(MFRoot, MFI, items_vertical_bitmaps, Itemlist, transCount, min_support)
+    MFI = MafiaRun(MFRoot, MFI, items_vertical_bitmaps, Itemlist, transCount, min_support)
 
     return MFI
 
@@ -537,7 +521,7 @@ def FPGrowthLFI(Dataset_Encoded, min_support=0.05):
 
     return LFI
 
-'''
+
 # Driver Code
 dataset_path = 'Assignment 1/Dataset_Cleaned.csv'
 #LabelIndexMap_path = 'Assignment 1/LabelIndexMaps.p'
@@ -563,7 +547,7 @@ print("Encoding...")
 Dataset_TE = TransactionalEncoder(Dataset_Preprocessed.head(Dataset_PortionSize))
 
 print("\n\n")
-
+'''
 # FIM
 # Apriori
 print("Apriori")
@@ -595,7 +579,6 @@ print("Frequent Itemsets:\n", FI)
 print("\n\n")
 print("RuleSet:\n", RuleSet.head)
 print("\n\n")
-
 
 
 # CFI
@@ -640,7 +623,7 @@ for cfi in CFI:
 print("\n\n")
 # print("RuleSet:\n", RuleSet.head)
 print("\n\n")
-
+'''
 # MFI
 # Pincer Search
 print("Pincer Search")
@@ -683,7 +666,7 @@ for mfi in MFI:
 print("\n\n")
 # print("RuleSet:\n", RuleSet.head)
 print("\n\n")
-
+'''
 # LFI
 # Apriori Based LFI
 print("Apriori Based LFI")

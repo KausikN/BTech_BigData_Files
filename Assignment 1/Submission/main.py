@@ -241,7 +241,7 @@ print("\n\n")
 print("\n\n")
 
 # Mafia
-'''
+
 print("Mafia")
 MinimumSupport = 0.1
 MinimumThreshold = 1
@@ -261,7 +261,7 @@ for mfi in MFI:
 print("\n\n")
 # print("RuleSet:\n", RuleSet.head)
 print("\n\n")
-'''
+
 # LFI
 # Apriori Based LFI
 print("Apriori Based LFI")
