@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from functools import lru_cache
+#from functools import lru_cache
 from mlxtend.frequent_patterns import association_rules
 from mlxtend.frequent_patterns import apriori, fpgrowth
 from mlxtend.preprocessing import TransactionEncoder
@@ -521,7 +521,7 @@ def FPGrowthLFI(Dataset_Encoded, min_support=0.05):
 
     return LFI
 
-
+'''
 # Driver Code
 dataset_path = 'Assignment 1/Dataset_Cleaned.csv'
 #LabelIndexMap_path = 'Assignment 1/LabelIndexMaps.p'
@@ -547,7 +547,7 @@ print("Encoding...")
 Dataset_TE = TransactionalEncoder(Dataset_Preprocessed.head(Dataset_PortionSize))
 
 print("\n\n")
-'''
+
 # FIM
 # Apriori
 print("Apriori")
@@ -623,7 +623,7 @@ for cfi in CFI:
 print("\n\n")
 # print("RuleSet:\n", RuleSet.head)
 print("\n\n")
-'''
+
 # MFI
 # Pincer Search
 print("Pincer Search")
@@ -666,7 +666,7 @@ for mfi in MFI:
 print("\n\n")
 # print("RuleSet:\n", RuleSet.head)
 print("\n\n")
-'''
+
 # LFI
 # Apriori Based LFI
 print("Apriori Based LFI")

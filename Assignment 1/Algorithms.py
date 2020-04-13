@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 import pandas as pd
 from tqdm import tqdm
-from functools import lru_cache
+#from functools import lru_cache
 from mlxtend.frequent_patterns import association_rules
 from mlxtend.frequent_patterns import apriori, fpgrowth
 from mlxtend.preprocessing import TransactionEncoder

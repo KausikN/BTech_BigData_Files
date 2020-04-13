@@ -12,7 +12,7 @@ import BayesClassifier as bc
 # - Preprocessing ------------------------------------------------------------------------------------------------
 print("- Preprocessing ------------------------------------------------------------------------------------------------")
 # Open and Clean Dataset
-dataset_path = 'Assignment 1/Dataset.csv'
+dataset_path = 'Dataset.csv'
 Dataset = pre.ReadCSVFile(dataset_path)
 
 # Print Dataset
@@ -95,18 +95,18 @@ print("\n\n")
 Dataset_Cleaned = Dataset_RedundantCleaned
 
 # Save Cleaned Dataset
-pre.WriteCSVFile(Dataset_Cleaned, 'Assignment 1/Dataset_Cleaned.csv')
+pre.WriteCSVFile(Dataset_Cleaned, 'Dataset_Cleaned.csv')
 
 # Encode Dataset
 print("Encoding Dataset...")
 Data_Transformed, LabelIndexMaps = pre.EncodeDataset(Dataset_Cleaned)
 print("Encoded Dataset: 5 Rows:")
 print(Data_Transformed.head(n=5))
-#print(LabelIndexMaps)
+print(LabelIndexMaps)
 
 # Save Encoded Dataset
-pre.WriteCSVFile(Data_Transformed, 'Assignment 1/Dataset_Cleaned_Encoded.csv')
-pre.pickle.dump(LabelIndexMaps, open('Assignment 1/LabelIndexMaps.p', 'wb'))
+pre.WriteCSVFile(Data_Transformed, 'Dataset_Cleaned_Encoded.csv')
+pre.pickle.dump(LabelIndexMaps, open('LabelIndexMaps.p', 'wb'))
 
 # Visualise Preprocessed Data - Family Distribution
 pre.Histogram(Data_Transformed['Family'], len(LabelIndexMaps['Family']), 'Family Name', 'Frequency', 'Family Frequency')
@@ -116,8 +116,8 @@ print("\n\n")
 
 # - Part A - FIM Algos ------------------------------------------------------------------------------------------------
 print("- Part A - FIM Algos ------------------------------------------------------------------------------------------------")
-dataset_path = 'Assignment 1/Dataset_Cleaned.csv'
-#LabelIndexMap_path = 'Assignment 1/LabelIndexMaps.p'
+dataset_path = 'Dataset_Cleaned.csv'
+#LabelIndexMap_path = 'LabelIndexMaps.p'
 
 Dataset_Preprocessed = algo.ReadCSVFile(dataset_path)
 #LabelIndexMap = pickle.load(open(LabelIndexMap_path, 'rb'))
@@ -314,7 +314,9 @@ print("\n\n")
 # - Part C - Predictive Analytics ------------------------------------------------------------------------------------------------
 print("- Part C - Predictive Analytics ------------------------------------------------------------------------------------------------")
 # Decision Tree
-Dataset_Path = 'Assignment 1/balance-scale.csv'
+print("Decision Tree on balance-scale dataset:")
+
+Dataset_Path = 'balance-scale.csv'
 
 print("\n\n")
 
@@ -343,6 +345,7 @@ print("\n\n")
 
 # Bayes Classifier
 print("\n\n")
+print("Bayes Classifier on Iris dataset:")
 
 # Building Phase
 Dataset = bc.ImportDataset_Iris()
