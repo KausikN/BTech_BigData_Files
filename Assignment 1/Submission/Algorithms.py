@@ -37,7 +37,7 @@ def DescribeDataset(Dataset):
     print(Dataset.head)
 
 # Util Functions
-def TransactionalEncoder(Dataset):
+def OneHotEncoder(Dataset):
     # TE = TransactionEncoder()
     # TE_Arr = TE.fit(Dataset).transform(Dataset)
     # return pd.DataFrame(TE_Arr, columns=TE.columns_)
@@ -544,7 +544,7 @@ if Dataset_PortionSize > DatasetRowCount:
     Dataset_PortionSize = DatasetRowCount
 print("Operating on", Dataset_PortionSize, " data rows.")
 print("Encoding...")
-Dataset_TE = TransactionalEncoder(Dataset_Preprocessed.head(Dataset_PortionSize))
+Dataset_TE = OneHotEncoder(Dataset_Preprocessed.head(Dataset_PortionSize))
 
 print("\n\n")
 

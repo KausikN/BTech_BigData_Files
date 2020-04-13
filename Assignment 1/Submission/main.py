@@ -131,13 +131,15 @@ print(Dataset_Preprocessed.head(n=5))
 print("\n")
 
 # Encode Dataset
+### - Change to limit size of dataset encoded
 DatasetPortionPercentage = 0.005
+### - Change to limit size of dataset encoded
 Dataset_PortionSize = int(DatasetPortionPercentage * DatasetRowCount)
 if Dataset_PortionSize > DatasetRowCount:
     Dataset_PortionSize = DatasetRowCount
 print("Operating on", Dataset_PortionSize, " data rows.")
 print("Encoding...")
-Dataset_TE = algo.TransactionalEncoder(Dataset_Preprocessed.head(Dataset_PortionSize))
+Dataset_TE = algo.OneHotEncoder(Dataset_Preprocessed.head(Dataset_PortionSize))
 
 print("\n\n")
 
