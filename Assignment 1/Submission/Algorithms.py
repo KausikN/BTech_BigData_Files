@@ -109,6 +109,8 @@ def GenerateMFCS(MFCS, Items_Si):		#For Pincer Search Algorithm
 def compVertBitmap(itemset, bitMap):
     if len(itemset) == 1:
         item = str(itemset[0])
+        print(item)
+        print(bitMap.keys())
         return bitMap[item]
 
     else:
@@ -521,7 +523,7 @@ def FPGrowthLFI(Dataset_Encoded, min_support=0.05):
 
     return LFI
 
-'''
+
 # Driver Code
 dataset_path = 'Assignment 1/Dataset_Cleaned.csv'
 #LabelIndexMap_path = 'Assignment 1/LabelIndexMaps.p'
@@ -705,4 +707,3 @@ for lfi in LFI:
 print("\n\n")
 # print("RuleSet:\n", RuleSet.head)
 print("\n\n")
-'''

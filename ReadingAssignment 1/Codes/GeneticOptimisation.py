@@ -57,13 +57,13 @@ equation_inputs = [4, -2, 3.5, 5, -11, -4.7, 2.5, 0.1]
 
 num_weights = len(equation_inputs) # Number of the weights we are looking to optimize.
 
-sol_per_pop = 2000 # Defining the population size.
+sol_per_pop = 200 # Defining the population size.
 
 pop_size = (sol_per_pop, num_weights) # The population will have sol_per_pop chromosomes where each chromosome has num_weights genes.
 
 num_generations = 5000
 
-num_parents_mating = 1000
+num_parents_mating = 100
 
 ncols = 1
 

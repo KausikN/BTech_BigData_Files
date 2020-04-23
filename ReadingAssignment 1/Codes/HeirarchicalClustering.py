@@ -2,64 +2,129 @@
 Test driving Heirarchical Clustering Algorithm
 '''
 # Imports
-from sklearn.cluster import AgglomerativeClustering
-import matplotlib.pyplot as plt
+from sklearn import cluster
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Main Functions
-# def AgglomerativeClustering(items):
-#     cluster_points = []
-#     cluster_names = []
+# Main Functions
+def ClosestPoints(Points):
+    min_distance = None
+    min_points = (-1, -1)
+    for i in range(len(Points)):
+        for j in range(i+1, len(Points)):
+            dist = Dist(Points[i], Points[j])
+            if min_distance == None or min_distance > dist:
+                min_distance = dist
+                min_points = (i, j)
+    return min_distance, min_points
 
-#     # Initially all points are clusters
-#     index = 0
-#     for item in items:
-#         cluster_points.append(item)
-#         cluster_names.append([index])
-#         index += 1
-    
-#     # Find proximity matrix
-#     Prox_Matrix = ProximityMatrix(cluster_points)
+def MeanPoint(A, B):
+    C = []
+    for a, b in zip(A, B):
+        C.append((a+b)/2)
+    return C
 
-#     # Merge Nearest Clusters
-#     cluster_names_new = cluster_names.copy()
-#     cluster_points_new = cluster_points.copy()
-#     merged_indices = []
-#     merged_values = []
-#     for i in range(len(cluster_points)):
-#         if i in merged_indices:
-#             continue
-#         closest_index = -1
-#         closest_value = -1
-#         for j in range(i+1, len(cluster_points)):
-#             if j in merged_indices:
-#                 continue
-#             if closest_value == -1 or Prox_Matrix[str(i) + "_" + str(j)] < closest_value:
-#                 closest_index = j
-#                 closest_value = Prox_Matrix[str(i) + "_" + str(j)]
-#         if closest_index > -1:
+def Dist(A, B):
+    return (((A[0] - B[0])**2) + ((A[1] - B[1])**2)) ** (0.5)
 
-#             merged_indices.append(closest_index)
+def AgglomerativeClustering(items, n_clusters):
+    Clusters = []
+    ClusterPoints = []
 
+    # Initially every item is a cluster
+    for pi in range(len(items)):
+        Clusters.append([pi])
+        ClusterPoints.append(items[pi])
 
+    new_Clusters = Clusters
+    new_ClusterPoints = ClusterPoints
+    iteration = 1
+    while(len(new_Clusters) > n_clusters):
+        Clusters = new_Clusters
+        ClusterPoints = new_ClusterPoints
 
-# Driver Code
-items = np.array([
-        [5,3],
-        [10,15],
-        [15,12],
-        [24,10],
-        [30,30],
-        [85,70],
-        [71,80],
-        [60,78],
-        [70,55],
-        [80,91]
-                ])
+        # Find Closest Points
+        min_dist, closest_points = ClosestPoints(ClusterPoints)
 
+        # Merge the closest points
+        # Remove to be merged
+        new_ClusterPoints = RemoveIndices(new_ClusterPoints, closest_points)
+        new_Clusters = RemoveIndices(new_Clusters, closest_points)
+
+        # Add merged
+        this_cluster = list(np.append(np.array(Clusters[closest_points[0]]), np.array(Clusters[closest_points[1]])))
+        mean_point = MeanPoint(ClusterPoints[closest_points[0]], ClusterPoints[closest_points[1]])
+        new_Clusters.append(this_cluster)
+        new_ClusterPoints.append(mean_point)
+        print(iteration)
+        print("len:", len(new_Clusters))
+        print(Clusters[closest_points[0]])
+        print(Clusters[closest_points[1]])
+        print(this_cluster)
+        print(mean_point)
+
+        iteration += 1
+    Clusters = new_Clusters
+    ClusterPoints = new_ClusterPoints
+
+    ClusterMap = {}
+    for cluster_index in range(len(Clusters)):
+        for p in Clusters[cluster_index]:
+            ClusterMap[str(p)] = cluster_index
+
+    return ClusterMap, ClusterPoints
+
+def Plot(Points, corres_cluster):
+    Points = np.array(Points)
+    if corres_cluster == None:
+        plt.scatter(Points[:, 0], Points[:, 1])
+    else:
+        plt.scatter(Points[:, 0], Points[:, 1], c=corres_cluster, cmap='rainbow')
+    plt.show()
+
+def RemoveIndices(Items, Indices):
+    new_Items = []
+    for i in range(len(Items)):
+        if not i in Indices:
+            new_Items.append(Items[i])
+    return new_Items
+
+# ---------------------------------------- Self Made Function Driver Code ----------------------------------------
+Points = [(3, 4), (7, 5), (2, 6), (3, 1),
+        (8, 2), (7, 3), (4, 4), (6, 6),
+        (7, 4), (6, 7)]
+
+n_clusters = 3
+
+Plot(Points, None)
+
+min_distance, min_points = ClosestPoints(Points)
+
+print("Min Distance:", min_distance)
+print("Closest Points:", Points[min_points[0]], Points[min_points[1]])
+
+ClusterMap, ClusterPoints = AgglomerativeClustering(Points, n_clusters)
+                
+corres_cluster = []
+for pi in range(len(Points)):
+    corres_cluster.append(ClusterMap[str(pi)])
+Plot(Points, corres_cluster)
+
+# ---------------------------------------- Library Driver Code ----------------------------------------
+minval = 0
+maxval = 100
+n_points = 100
 N_Clusters = 3
 
-Cluster = AgglomerativeClustering(n_clusters=N_Clusters, affinity='euclidean', linkage='ward')
+# Generate Random Points
+items = np.random.randint(minval, maxval+1, (n_points, 2))
+
+plt.scatter(items[:,0], items[:,1])
+plt.show()
+
+# Clustering
+Cluster = cluster.AgglomerativeClustering(n_clusters=N_Clusters, affinity='euclidean', linkage='ward')
 Cluster.fit_predict(items)
 
 plt.scatter(items[:,0], items[:,1], c=Cluster.labels_, cmap='rainbow')

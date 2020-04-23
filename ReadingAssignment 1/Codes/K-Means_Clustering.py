@@ -44,21 +44,31 @@ import numpy as np
 
 
 # Driver Code
-items = np.array([
-        [5,3],
-        [10,15],
-        [15,12],
-        [24,10],
-        [30,30],
-        [85,70],
-        [71,80],
-        [60,78],
-        [70,55],
-        [80,91]
-                ])
+# items = np.array([
+#         [5,3],
+#         [10,15],
+#         [15,12],
+#         [24,10],
+#         [30,30],
+#         [85,70],
+#         [71,80],
+#         [60,78],
+#         [70,55],
+#         [80,91]
+#                 ])
 
+minval = 0
+maxval = 100
+n_points = 100
 N_Clusters = 3
 
+# Generate Random Points
+items = np.random.randint(minval, maxval+1, (n_points, 2))
+
+plt.scatter(items[:,0], items[:,1])
+plt.show()
+
+# Clustering
 Cluster = KMeans(n_clusters=N_Clusters)
 Cluster.fit_predict(items)
 
