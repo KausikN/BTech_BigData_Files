@@ -1,0 +1,18 @@
+1. Understand the working of Hyperlink Induced Topic Search (HITS). Give a pseudocode and illustrate the same over a sample dataset of your choice.
+
+2. Understand the working of BIRCH and DBSCAN clustering algorithms. Give a pseudocode and trace the same over a sample dataset of your choice.
+
+3. Understand the different types of selection, cross-over, mutation operation that are employed by Genetic algorithms. Illustrate the working of each over a population of chromosomes (Refer David Goldberg or any other online sources). Explore a minimum of at least 4 to 5 operators under each type. 
+
+4. Apply GA based approach to solve an instance of Travelling Salesman problem.
+
+5. Understand the working of SLIQ and ARBC classifiers. Give a pseudocode and illustrate the same over a sample dataset of your choice.
+
+6. Define sequence pattern mining and understand the working of 
+i) GSP
+ii) Prefix-Span algorithms.
+Give a pseudocode and illustrate the same over a sample dataset of your choice.
+
+7. Understand the schemata theorem of GA (relevance of selection/crossover/mutation with the 3 components of the schema theorem. Apply the theorem to the optimization function f(x)= x3-2x2+x. Check whether the empirical results obtained earlier in assignment-I matches with the theorem.
+ 
+8. Understand the working of linear and non-linear regression models. Give a pseudocode and illustrate the same over a sample dataset of your choice. 
