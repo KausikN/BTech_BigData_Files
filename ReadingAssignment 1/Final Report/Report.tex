@@ -1,3 +1,7 @@
+%%%%%%%%%%%%  Generated using docx2latex.com  %%%%%%%%%%%%%%
+
+%%%%%%%%%%%%  v2.0.0-beta  %%%%%%%%%%%%%%
+
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{latexsym}
@@ -874,85 +878,77 @@ SO, majority is FALSE = y for x\par
 
 
 \vspace{\baselineskip}
-{\fontsize{14pt}{16.8pt}\selectfont Maximising f is same as minimising 1/f = F\par}\par
+{\fontsize{14pt}{16.8pt}\selectfont Code in GeneticOptimisation.py under Codes Folder\par}\par
 
-{\fontsize{14pt}{16.8pt}\selectfont Minimising F, \par}\par
+{\fontsize{14pt}{16.8pt}\selectfont Run for\par}\par
 
 \setlength{\parskip}{0.0pt}
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{C586C0}{import numpy as np}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{sol\_per\_pop = 200 $\#$  Defining the population size.}\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{C586C0}{from scipy import optimize}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_generations = 5000}\par}\par
 
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_parents\_mating = 100}\par}\par
 
-\vspace{\baselineskip}
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{6A9955}{$\#$  Function}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{select\_mating\_pool = select\_mating\_pool\_bestfitness}\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{569CD6}{def F(x):}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{crossover = crossover\_OnePoint}\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{    v = ((x$\ast$ $\ast$ 3) -2$\ast$ (x$\ast$ $\ast$ 2) + x)}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{mutation = mutation\_UniformNoise}\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{    if v == 0:}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{fitness\_func = PolynomialFitness}\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{        return 1}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{boundary = (0, 31)}\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{    return (1/((x$\ast$ $\ast$ 3) -2$\ast$ (x$\ast$ $\ast$ 2) + x))}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{equation\_inputs = [0, -2, 1]}\par}\par
 
-
-\vspace{\baselineskip}
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{6A9955}{$\#$  Genetic Optimisation}\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{DCDCAA}{print(optimize.minimize(F, x0=0))}\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{DCDCAA}{print(optimize.minimize(F, x0=0, method="L-BFGS-B"))}\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{DCDCAA}{quit()}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_weights = 1 $\#$  Number of the weights we are looking to optimize.}\par}\par
 
 
 \vspace{\baselineskip}
 {\fontsize{14pt}{16.8pt}\selectfont Output:\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont fun: array([-3782864.62824557])\par}\par
+Fitness Graph\par
 
-{\fontsize{10pt}{12.0pt}\selectfont  hess\_inv: array([[-2.91991532e-20]])\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \ \  jac: array([-1.51649125e+13])\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \  message: 'Desired error not necessarily achieved due to precision loss.'\par}\par
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 4 starts here %%%%%%%%%%%%%%%%%%%%
 
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \  nfev: 192\par}\par
+\begin{figure}[H]
+	\begin{Center}
+		\includegraphics[width=3.16in,height=2.37in]{./media/image4.png}
+	\end{Center}
+\end{figure}
 
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \ \  nit: 2\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \  njev: 60\par}\par
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 4 Ends here %%%%%%%%%%%%%%%%%%%%
 
-{\fontsize{10pt}{12.0pt}\selectfont \ \  status: 2\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \  success: False\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \ \ \ \  x: array([-2.6434979e-07])\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \ \  fun: array([-1.2256126e+08])\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont  hess\_inv: <1x1 LbfgsInvHessProduct with dtype=float64>\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \ \  jac: array([6.65798886e+16])\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \  message: b'ABNORMAL\_TERMINATION\_IN\_LNSRCH'\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \  nfev: 136\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \ \  nit: 2\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \ \  status: 2\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \  success: False\par}\par
-
-{\fontsize{10pt}{12.0pt}\selectfont \ \ \ \ \ \ \  x: array([-8.15918494e-09])\par}\par
+\par
 
 
 \vspace{\baselineskip}
 
 \vspace{\baselineskip}
+Gene Updation Graph\par
+
+
+
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 5 starts here %%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[H]
+	\begin{Center}
+		\includegraphics[width=6.4in,height=2.65in]{./media/image5.png}
+	\end{Center}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 5 Ends here %%%%%%%%%%%%%%%%%%%%
+
+\par
+
+Best Fitness: 898.9999935912551\par
+
+Best Chromosome: [30.87496049]\par
+
 
 \vspace{\baselineskip}
 
@@ -1496,16 +1492,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 4 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 6 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.4in,height=4.8in]{./media/image4.png}
+		\includegraphics[width=6.4in,height=4.8in]{./media/image6.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 4 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 6 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1523,16 +1519,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 5 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 7 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.4in,height=4.8in]{./media/image5.png}
+		\includegraphics[width=6.4in,height=4.8in]{./media/image7.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 5 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 7 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1566,16 +1562,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 6 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 8 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=3.73in,height=1.3in]{./media/image6.png}
+		\includegraphics[width=3.73in,height=1.3in]{./media/image8.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 6 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 8 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1595,16 +1591,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 7 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 9 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=3.67in,height=0.99in]{./media/image7.png}
+		\includegraphics[width=3.67in,height=0.99in]{./media/image9.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 7 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 9 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1620,16 +1616,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 8 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 10 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=3.13in,height=0.92in]{./media/image8.png}
+		\includegraphics[width=3.13in,height=0.92in]{./media/image10.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 8 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 10 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1643,16 +1639,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 9 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 11 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=3.58in,height=0.7in]{./media/image9.png}
+		\includegraphics[width=3.58in,height=0.7in]{./media/image11.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 9 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 11 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1668,16 +1664,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 \vspace{\baselineskip}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 10 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 12 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=5.13in,height=0.5in]{./media/image10.png}
+		\includegraphics[width=5.13in,height=0.5in]{./media/image12.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 10 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 12 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1694,7 +1690,7 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 \vspace{\baselineskip}
 \begin{Center}
-{\fontsize{28pt}{33.6pt}\selectfont Q VII\par}
+{\fontsize{28pt}{33.6pt}\selectfont Q VIII\par}
 \end{Center}\par
 
 {\fontsize{14pt}{16.8pt}\selectfont VIII) \par}\par
@@ -1705,46 +1701,46 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 11 starts here %%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}[H]
-	\begin{Center}
-		\includegraphics[width=6.5in,height=1.86in]{./media/image11.png}
-	\end{Center}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 11 Ends here %%%%%%%%%%%%%%%%%%%%
-
-\par
-
-
-
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 12 starts here %%%%%%%%%%%%%%%%%%%%
-
-\begin{figure}[H]
-	\begin{Center}
-		\includegraphics[width=6.5in,height=5.13in]{./media/image12.png}
-	\end{Center}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 12 Ends here %%%%%%%%%%%%%%%%%%%%
-
-\par
-
-
-
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 13 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.5in,height=6.21in]{./media/image13.png}
+		\includegraphics[width=6.5in,height=1.86in]{./media/image13.png}
 	\end{Center}
 \end{figure}
 
 
 %%%%%%%%%%%%%%%%%%%% Figure/Image No: 13 Ends here %%%%%%%%%%%%%%%%%%%%
+
+\par
+
+
+
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 14 starts here %%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[H]
+	\begin{Center}
+		\includegraphics[width=6.5in,height=5.13in]{./media/image14.png}
+	\end{Center}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 14 Ends here %%%%%%%%%%%%%%%%%%%%
+
+\par
+
+
+
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 15 starts here %%%%%%%%%%%%%%%%%%%%
+
+\begin{figure}[H]
+	\begin{Center}
+		\includegraphics[width=6.5in,height=6.21in]{./media/image15.png}
+	\end{Center}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 15 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1770,16 +1766,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 14 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 16 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.5in,height=4.29in]{./media/image14.png}
+		\includegraphics[width=6.5in,height=4.29in]{./media/image16.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 14 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 16 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1789,16 +1785,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 15 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 17 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.4in,height=3.15in]{./media/image15.png}
+		\includegraphics[width=6.4in,height=3.15in]{./media/image17.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 15 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 17 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1806,16 +1802,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 16 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 18 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.4in,height=4.8in]{./media/image16.png}
+		\includegraphics[width=6.4in,height=4.8in]{./media/image18.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 16 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 18 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1847,16 +1843,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 17 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 19 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.4in,height=4.8in]{./media/image17.png}
+		\includegraphics[width=6.4in,height=4.8in]{./media/image19.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 17 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 19 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1864,16 +1860,16 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 18 starts here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 20 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.4in,height=4.8in]{./media/image18.png}
+		\includegraphics[width=6.4in,height=4.8in]{./media/image20.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 18 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 20 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
@@ -1883,49 +1879,63 @@ High Specificity means if outcome is negative, in reality also it is negative\pa
 
 {\fontsize{14pt}{16.8pt}\selectfont Inputs\par}\par
 
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{equation\_inputs = [4, -2, 3.5, 5, -11, -4.7, 2.5, 0.1]}\par}\par
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{sol\_per\_pop = 200 $\#$  Defining the population size.}\par}\par
+
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_generations = 5000}\par}\par
+
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_parents\_mating = 100}\par}\par
 
 
 \vspace{\baselineskip}
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{select\_mating\_pool = select\_mating\_pool\_bestfitness}\par}\par
+
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{crossover = crossover\_OnePoint}\par}\par
+
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{mutation = mutation\_UniformNoise}\par}\par
+
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{fitness\_func = PolyLinearFitness}\par}\par
+
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{boundary = (None, None)}\par}\par
+
+{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{equation\_inputs = [4, -2, 3.5, 5, -11, -4.7, 2.5, 0.1]}\par}\par
+
 {\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_weights = len(equation\_inputs) $\#$  Number of the weights we are looking to optimize.}\par}\par
 
 
 \vspace{\baselineskip}
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{sol\_per\_pop = 200 $\#$  Defining the population size.}\par}\par
-
 
 \vspace{\baselineskip}
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{pop\_size = (sol\_per\_pop, num\_weights) $\#$  The population will have sol\_per\_pop chromosomes where each chromosome has num\_weights genes.}\par}\par
-
-
-\vspace{\baselineskip}
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_generations = 5000}\par}\par
-
-
-\vspace{\baselineskip}
-{\fontsize{10pt}{12.0pt}\selectfont \textcolor[HTML]{D4D4D4}{num\_parents\_mating = 100}\par}\par
-
 {\fontsize{14pt}{16.8pt}\selectfont After Optimising,\par}\par
 
+Best Fitness: 13920.720451463068\par
+
+Best Chromosome: [ 411.87721227 -240.46700836\  384.55563335\  444.05949469 -501.41256815\par
+
+ -415.91873926\  302.42510916\ \  16.55506078]\par
+
+{\fontsize{10pt}{12.0pt}\selectfont Fitness Graph\par}\par
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 19 starts here %%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 21 starts here %%%%%%%%%%%%%%%%%%%%
 
 \begin{figure}[H]
 	\begin{Center}
-		\includegraphics[width=6.5in,height=0.79in]{./media/image19.png}
+		\includegraphics[width=3.45in,height=2.59in]{./media/image21.png}
 	\end{Center}
 \end{figure}
 
 
-%%%%%%%%%%%%%%%%%%%% Figure/Image No: 19 Ends here %%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% Figure/Image No: 21 Ends here %%%%%%%%%%%%%%%%%%%%
 
 \par
 
 
 \vspace{\baselineskip}
+Gene Updation Graph\par
 
-\vspace{\baselineskip}
+\par
+
 
 \printbibliography
 \end{document}
