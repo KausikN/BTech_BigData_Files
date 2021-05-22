@@ -314,7 +314,7 @@ def AClose(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
 def PincerSearch(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
     MFI = []
 
-    min_support = min_support * len(Dataset_Encoded.index)
+    # min_support = min_support * len(Dataset_Encoded.index)
     print("Minimum Support:", min_support)
 
     ListDicts = Dataset_Encoded.T.to_dict().values() # Convert Dataframe to list of dicts
@@ -390,7 +390,7 @@ def PincerSearch(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
                 Ck.remove(item)
         Items_Ci = Ck
 
-    return MFI
+    return MFI, MFCS
 
 # Mafia
 class MafiaTree:
@@ -452,7 +452,7 @@ def MafiaRun(currentMFNode, MFI, bitMap, Items, transCount, min_support):
 def Mafia(Dataset_Encoded, min_support=0.05, min_itemset_length=1):
     MFI = []
 
-    min_support = min_support * len(Dataset_Encoded.index)
+    # min_support = min_support * len(Dataset_Encoded.index)
     print("Minimum Support:", min_support)
 
     Items = Dataset_Encoded.keys()
@@ -521,7 +521,7 @@ def FPGrowthLFI(Dataset_Encoded, min_support=0.05):
 
     return LFI
 
-
+'''
 # Driver Code
 dataset_path = 'Assignment 1/Dataset_Cleaned.csv'
 #LabelIndexMap_path = 'Assignment 1/LabelIndexMaps.p'
@@ -546,7 +546,10 @@ print("Operating on", Dataset_PortionSize, " data rows.")
 print("Encoding...")
 Dataset_TE = TransactionalEncoder(Dataset_Preprocessed.head(Dataset_PortionSize))
 
+print(Dataset_TE)
+
 print("\n\n")
+'''
 '''
 # FIM
 # Apriori
@@ -626,8 +629,37 @@ print("\n\n")
 '''
 # MFI
 # Pincer Search
+Dataset_Enc = [
+    [1, 1, 0, 1, 0],
+    [1, 0, 0, 0, 1],
+    [1, 0, 1, 0, 1],
+    [1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 1],
+    [0, 1, 0, 1, 1],
+    [0, 1, 1, 0, 1],
+    [1, 0, 1, 1, 0],
+    [1, 1, 0, 1, 1],
+    [1, 1, 1, 1, 1],
+    [0, 1, 0, 1, 0],
+    [0, 0, 1, 1, 0],
+    [1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 0],
+    [0, 0, 0, 1, 1]
+]
+
+Dataset_Enc = np.array(Dataset_Enc) == 1
+
+Dataset_TE = pd.DataFrame(columns=['a', 'b', 'c', 'd', 'e'])
+Dataset_TE['a'] = Dataset_Enc[:, 0]
+Dataset_TE['b'] = Dataset_Enc[:, 1]
+Dataset_TE['c'] = Dataset_Enc[:, 2]
+Dataset_TE['d'] = Dataset_Enc[:, 3]
+Dataset_TE['e'] = Dataset_Enc[:, 4]
+
+print(Dataset_TE)
+
 print("Pincer Search")
-MinimumSupport = 0.1
+MinimumSupport = 2
 MinimumThreshold = 1
 MinimumItemsetLength = 1
 
@@ -635,7 +667,7 @@ print("Minimum Support -", MinimumSupport)
 print("Minimum Threshold -", MinimumThreshold)
 print("Minimum Itemset Length -", MinimumItemsetLength)
 
-MFI = PincerSearch(Dataset_TE, min_support=MinimumSupport, min_itemset_length=MinimumItemsetLength)
+MFI, MFCS = PincerSearch(Dataset_TE, min_support=MinimumSupport, min_itemset_length=MinimumItemsetLength)
 # RuleSet = RuleMining(MFI, min_threshold=MinimumThreshold)
 print("Maximal Frequent Itemsets:")
 mfi_index = 1
@@ -648,7 +680,7 @@ print("\n\n")
 
 # Mafia
 print("Mafia")
-MinimumSupport = 0.1
+MinimumSupport = 2
 MinimumThreshold = 1
 MinimumItemsetLength = 1
 
