@@ -1,3 +1,0 @@
-'''
-Test driving Backpropogation Algorithm
-'''
